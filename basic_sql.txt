@@ -1,0 +1,147 @@
+|     NAME     |   GENDER  |    Nickname    |
+| Eddard Stark |     M     |                |
+|   Jaime      |     M     |                |
+|    Cersei    |     F     |                |
+| Petyr Baelish|     M     |  Little Finger |
+|Sandor Clegane|     M     |    The Hound   |
+
+
+
+
+"--" is used for comments in SQL
+
+
+
+
+
+
+
+create table character(
+    id integer primary key,  #primary key is used to say that a colums is special
+    name text NOT NULL,             
+    gender varchar(1),
+    nickname text
+);
+
+#name text NOT NULL can be put instead if we want to restrict user from entering NULL values
+
+insert into character(name, gender)
+values("Eddard Stark", "M");
+
+insert into character(name, gender)
+values("Jaime", "M");
+
+insert into character(name, gender)
+values("Cersei", "F");
+
+select * from character order by name; # to display data in order of names
+
+insert into character(name, gender, nickname)
+values("Petyr Baelish", "M", "Little Finger");
+
+insert into character(name, gender, nickname)
+values("Sandor Clegane", "M", "The Hound");
+
+insert into character(name, gender)
+values(NULL, "F");       #this will work if the NOT NULL constraint is not applied
+
+
+create table affiliation(
+    id integer primary key,
+    name text not NULL,
+    location text not NULL
+);
+
+insert into affiliation(name, location)
+values("Stark", "Winterfell");
+
+insert into affiliation(name, location)
+values("Lannister", "King's Landing");
+
+insert into affiliation(name, location)
+values("Night's Watch", "Wall");
+
+insert into affiliation(name, location)
+values("Targaryen", "Dragonstone");
+
+alter table character
+add aff_id integer;
+
+update character
+set aff_id = 1
+where id = 1;
+
+update character
+set aff_id = 2
+where id = 2;
+
+update character
+set aff_id = 2
+where id = 3;
+
+update character
+set aff_id = 1
+where id = 4;
+
+update character
+set aff_id = 2
+where id = 5;
+
+select c.name, c.gender, a.name, a.location from character c, affiliation a
+where c.aff_id = a.id;
+
+select c.name, c.gender, a.name, a.location from character c, affiliation a
+where c.aff_id = a.id and a.location is "Winterfell";
+
+USING FOREIGN key
+
+create table affiliation(
+    id integer primary key,
+    name text not NULL,
+    location text not NULL
+);
+
+insert into affiliation(name, location)
+values("Stark", "Winterfell");
+
+insert into affiliation(name, location)
+values("Lannister", "King's Landing");
+
+insert into affiliation(name, location)
+values("Night's Watch", "Wall");
+
+insert into affiliation(name, location)
+values("Targaryen", "Dragonstone");
+
+create table character(
+    id integer primary key,  
+    name text NOT NULL,             
+    gender varchar(1),
+    nickname text,
+    aff_id integer references affiliation(id) 
+);
+
+-- foreign key
+
+--primary key is used to say that a colums is special
+ 
+-- so when inserting into character table we have to enter only valid values for aff id, that is,values that are present in affiliation table
+
+insert into character(name, gender, aff_id)
+values("Eddard Stark", "M", 1);
+
+insert into character(name, gender, aff_id)
+values("Jaime", "M", 2);
+
+insert into character(name, gender, aff_id)
+values("Cersei", "F", 2);
+
+insert into character(name, gender, nickname, aff_id)
+values("Petyr Baelish", "M", "Little Finger", 1);
+
+insert into character(name, gender, nickname, aff_id)
+values("Sandor Clegane", "M", "The Hound", 2);
+
+
+PRAGMA foreign_keys = on;   -- to turn on foreing keys;
+
