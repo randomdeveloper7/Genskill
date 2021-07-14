@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title> Pi Estimation </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+
+<body>
+    {% block content %}
+    {% endblock %}
+
+    <form method="post" action = "/estimate">
+        <label for = "iterations">Iterations</label>
+        <input name = "Iterations" type = "number" id = "iterations" required/>
+        <br/>
+
+        <label>Algorithm</label><br/>
+        <label for = "montecarlo">Monte Carlo</label>
+        <input type = "radio" id = "montecarlo" name = "Algorithm" value = "mc" required/>
+
+        <label for = "wallis">Wallis Product</label>
+        <input type = "radio" id = "wallis" name = "Algorithm" value = "w" required/>
+
+        <input type="submit" value="Compute">
+    </form>
+
+    <hr/>
+    You can search more stuff using,<a href="https://duckduckgo.com"> a popular search engine </a>.
+</body>
+
+</html>
