@@ -1,0 +1,15 @@
+<html>
+<head>
+    <title> Jobs Page </title>
+</head>
+<body>
+    <h1> Jobs Available </h1>
+    <ol>
+        {% for title, company_name, jd_text in jobs %}
+        <li>
+            {{title}} ::: {{company_name}} <br/> {{jd_text}}
+        </li>
+        {% endfor %}
+    </ol>
+</body>
+</html>
